@@ -1,0 +1,6 @@
+.DS_Store
+__pycache__/
+*.pyc
+/data/*.zip
+October-Delhi.csv
+October-Delhi.csv.zip

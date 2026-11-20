@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#1f3a2b">
+  <title>Delhi Lines · Bus journey planner</title>
+  <link rel="icon" href="mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="journeys.css">
+</head>
+<body>
+  <a class="skip" href="#search">Skip to journey search</a>
+  <header class="masthead"><div class="shell mast-inner">
+    <a class="brand" href="#top" aria-label="Delhi Lines home"><img src="mark.svg" alt="">Delhi Lines</a>
+    <nav aria-label="Main navigation"><a href="#search">Plan a journey</a><a href="#options">Journey options</a><a href="#map-title">Route map</a><button type="button" class="plain" data-about>About the data</button></nav>
+    <span class="location"><i data-icon="pin"></i>Delhi, India</span>
+  </div></header>
+  <main id="top">
+    <section class="hero" aria-labelledby="title">
+      <img class="hero-photo" src="delhi-avenue.webp" alt="" fetchpriority="high">
+      <div class="shell hero-grid">
+        <div class="hero-copy">
+          <h1 id="title" aria-label="Delhi Lines"><em>Delhi</em><span>Lines</span></h1>
+          <h2>Plan your Delhi bus ride.</h2>
+          <p>Compare journey times and see where ticket demand rises along your route.</p>
+          <div class="hero-actions"><a class="button primary" href="#search"><i data-icon="bus"></i>Plan my journey</a><button class="button ghost" type="button" data-about>How it works</button></div>
+        </div>
+        <aside class="demo-card" aria-labelledby="demo-title">
+          <div class="demo-head"><img src="delhi-avenue.webp" alt=""><div><h2 id="demo-title">Try route 990DOWN</h2><p>West Patel Nagar to Karol Bagh Metro Station</p></div></div>
+          <div class="presets" role="group" aria-label="Example departure time"><button type="button" data-demo="10:00"><i data-icon="sun"></i>10 am</button><button type="button" data-demo="13:00"><i data-icon="afternoon"></i>1 pm</button></div>
+          <div aria-live="polite" aria-atomic="true"><dl class="demo-metrics"><div><dt>Journey including wait</dt><dd id="demo-duration"></dd></div><div><dt>Ticket demand</dt><dd id="demo-demand"></dd></div></dl>
+          <p class="demo-note">Monday, 19 October 2026 · Scheduled service</p></div>
+        </aside>
+      </div>
+    </section>
+    <div class="shell planner-body">
+    <section aria-labelledby="plan-title" class="plan-section" id="search">
+    <h2 id="plan-title" class="display">Plan your journey</h2>
+    <p class="section-lede">Choose your stops and departure time.</p>
+    <form id="journey-search">
+      <div class="form-row">
+        <label class="control"><span><i data-icon="origin"></i>From</span><select id="origin"></select></label>
+        <button id="swap" type="button" class="swap" title="Swap stops" aria-label="Swap stops"><i data-icon="swap"></i></button>
+        <label class="control"><span><i data-icon="pin"></i>To</span><select id="dest"></select></label>
+        <label class="control date"><span><i data-icon="calendar"></i>Travel date</span><input id="day" type="date" value="2026-10-19" required></label>
+        <label class="control time"><span><i data-icon="clock"></i>Leave at <small>IST</small></span><input id="when" type="time" value="10:00" required></label>
+        <button class="find" type="submit"><i data-icon="search"></i>Find journeys</button>
+      </div>
+
+    </form>
+    <p id="error" role="alert" hidden></p>
+    </section>
+    <div class="workspace" id="options">
+      <section id="results" aria-label="Journey options"></section>
+      <aside class="map-section" aria-labelledby="map-title">
+        <div class="panel-heading"><h2 id="map-title">Route map</h2><span class="map-tag" id="map-tag"></span></div>
+        <div class="map-frame"><div id="map"></div>
+          <div class="map-meta" id="map-meta"></div>
+        </div>
+      </aside>
+    </div>
+    <footer><span><i data-icon="layers"></i> October 2026 pilot <b>·</b> Delhi bus schedules &amp; ONDC e-tickets</span><button class="plain" type="button" data-about>How estimates work</button></footer>
+    </div>
+  </main>
+  <dialog id="about" aria-labelledby="about-title"><div class="dialog-head"><h2 id="about-title">About the data</h2><button autofocus type="button" class="close" aria-label="Close" id="close"><i data-icon="close"></i></button></div>
+    <h3>Scheduled journey times</h3><p>This pilot covers Delhi routes 85 and 990 in both directions. Times come from an archived timetable and include the wait after your chosen departure time. Actual bus arrivals can vary.</p>
+    <h3>How to read ticket demand</h3><p>Each label compares a route segment with its usual weekday or weekend demand. Estimates use ONDC e-tickets from October 1–24, 2026, grouped into half-hour periods. Seat availability is unknown.</p>
+    <h3>Where coverage is limited</h3><p>Only 6.65% of training tickets on these routes matched a single route pattern. A journey shows “Limited data” when any segment lacks enough observations. In the held-out week, 45% of supported weekday estimates kept the same label.</p>
+  </dialog>
+  <script src="data.js"></script><script src="planner.js"></script><script src="map.js"></script><script src="journeys.js"></script><script src="interface.js"></script>
+</body>
+</html>

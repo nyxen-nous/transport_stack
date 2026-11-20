@@ -1,0 +1,34 @@
+{
+  "sha256": "d5d71aafccc13d03b09ab5c27e96fa303621a0cde9b0e5eea63167c2083e332f",
+  "verified_archive_crc32": "0xfebac85f",
+  "columns": [
+    "passenger_count",
+    "amount",
+    "vehicle_number",
+    "ticket_type_id",
+    "end_stop_name",
+    "route",
+    "start_stop_name",
+    "created_at",
+    "is_ac"
+  ],
+  "counts": {
+    "rows": 2559899,
+    "repeat_rows_after_first": 0,
+    "training_same_stop_rows_excluded": 84
+  },
+  "missing_fields": {
+    "route": 0,
+    "start_stop_name": 0,
+    "end_stop_name": 0,
+    "vehicle_number": 1242167,
+    "created_at": 0,
+    "passenger_count": 0
+  },
+  "dated_rows_before_dedup": {
+    "holdout": 615028,
+    "training": 1944871
+  },
+  "training_route_labels": 2232,
+  "shared_stop_pairs": 59933
+}

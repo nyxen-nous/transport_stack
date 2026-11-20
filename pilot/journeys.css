@@ -1,0 +1,84 @@
+.jo-panel {
+  --jo-ink: var(--ink, #1c2a22);
+  --jo-muted: var(--muted, #5f6a62);
+  --jo-action: var(--action, #1f3a2b);
+  --jo-action-ink: var(--action-ink, #fffdf8);
+  --jo-surface: var(--surface, #fffdf8);
+  --jo-ground: var(--ground, #f6f1e7);
+  --jo-tray: var(--surface-2, #efe8da);
+  --jo-line: color-mix(in srgb, var(--jo-ink) 14%, transparent);
+  --jo-focus: var(--focus, var(--jo-action));
+  --jo-round: 20px;
+  min-width: 0;
+  color: var(--jo-ink);
+}
+.jo-panel *, .jo-panel *::before, .jo-panel *::after { box-sizing: border-box; }
+.jo-panel button { font: inherit; cursor: pointer; touch-action: manipulation; }
+.jo-panel svg { width: 1em; height: 1em; flex: none; }
+.jo-heading { margin: 0 0 16px; font-size: clamp(1.6rem, 2.8vw, 2.65rem); font-weight: 650; line-height: 1.08; letter-spacing: -.045em; }
+.jo-filters { display: inline-flex; width: fit-content; max-width: 100%; gap: 2px; padding: 4px; margin-bottom: 16px; background: var(--jo-tray); border-radius: 999px; }
+.jo-panel .jo-filter { display: inline-flex; align-items: center; justify-content: center; gap: 7px; border: 0; border-radius: 999px; padding: 8px 13px; font-size: .9rem; line-height: 1.2; font-weight: 600; color: var(--jo-muted); background: transparent; min-height: 36px; }
+.jo-filter[aria-pressed="true"] { background: var(--jo-action); color: var(--jo-action-ink); }
+.jo-filter:hover:not([aria-pressed="true"]) { color: var(--jo-ink); }
+.jo-count { font-size: .8rem; font-variant-numeric: tabular-nums; font-weight: 650; background: color-mix(in srgb, currentColor 12%, transparent); border-radius: 999px; min-width: 1.35em; padding: 2px 4px; }
+.jo-list { display: grid; gap: 14px; }
+.jo-card, .jo-empty {
+  border: 1px solid var(--jo-line);
+  border-radius: var(--jo-round);
+  background: color-mix(in srgb, var(--jo-surface) 88%, transparent);
+  box-shadow: inset 0 1px 0 #ffffff28, 0 18px 36px -30px #241c1240;
+}
+.jo-card { min-width: 0; position: relative; transition: background-color .22s, border-color .22s, box-shadow .22s; }
+.jo-card:has(.jo-pick[aria-pressed="true"]) {
+  border-color: var(--jo-action);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--jo-action) 17%, transparent), 0 20px 36px -29px #231a1240;
+}
+.jo-panel .jo-pick { display: flex; width: 100%; justify-content: space-between; gap: 16px; padding: 22px 24px 16px; color: inherit; text-align: left; background: transparent; border: 0; border-radius: var(--jo-round) var(--jo-round) 0 0; }
+@media (hover:hover) {
+  .jo-card:has(.jo-pick:hover) { background-color: var(--jo-surface); border-color: var(--jo-action); }
+  .jo-summary:hover .jo-disclosure { text-decoration: underline; text-underline-offset: 3px; }
+}
+.jo-pick:focus-visible, .jo-summary:focus-visible, .jo-filter:focus-visible { outline: 3px solid var(--jo-focus); outline-offset: 3px; z-index: 1; }
+.jo-info { display: grid; gap: 12px; min-width: 0; }
+.jo-routes, .jo-times, .jo-route, .jo-disclosure, .jo-demand, .jo-change { display: inline-flex; align-items: center; }
+.jo-routes { gap: 6px; flex-wrap: wrap; color: var(--jo-muted); }
+.jo-routes > svg { width: .875rem; }
+.jo-route { gap: 6px; padding: 4px 10px; background: var(--jo-tray); border-radius: 999px; color: var(--jo-ink); font-size: .875rem; line-height: 1.3; font-weight: 650; }
+.jo-route svg { width: 1rem; height: 1rem; }
+.jo-times { gap: 8px; font-size: 1.06rem; font-weight: 580; line-height: 1.2; font-variant-numeric: tabular-nums; }
+.jo-times svg { color: var(--jo-muted); width: .9em; }
+.jo-duration { align-self: center; flex: none; display: grid; justify-items: end; gap: 4px; }
+.jo-duration-value { font-size: clamp(1.95rem, 3vw, 2.65rem); line-height: 1; font-weight: 650; font-variant-numeric: tabular-nums; letter-spacing: -.055em; }
+.jo-unit { font-size: .48em; letter-spacing: -.035em; font-weight: 550; }
+.jo-duration-caption { font-size: .82rem; line-height: 1.3; color: var(--jo-muted); }
+.jo-details { margin: 0 24px; border-top: 1px solid var(--jo-line); }
+.jo-summary { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; min-height: 52px; padding: 10px 0; cursor: pointer; font-size: .875rem; border-radius: 5px; }
+.jo-summary::-webkit-details-marker { display: none; }
+.jo-summary::marker { content: ''; }
+.jo-disclosure { gap: 5px; margin-left: auto; color: var(--jo-ink); font-weight: 580; }
+.jo-disclosure svg { transition: transform .22s ease; }
+.jo-details[open] > .jo-summary .jo-disclosure svg { transform: rotate(180deg); }
+.jo-demand { width: fit-content; gap: 5px; border-radius: 999px; font-size: .8125rem; font-weight: 600; padding: 5px 9px; line-height: 1.2; }
+.jo-demand svg { width: .95rem; height: .95rem; }
+.jo-demand-limited { color: var(--jo-muted); background: var(--jo-tray); }
+.jo-demand-higher { color: var(--jo-ink); background: color-mix(in srgb, #d99a1e 24%, var(--jo-surface)); }
+.jo-demand-lower { color: var(--jo-ink); background: color-mix(in srgb, #589866 22%, var(--jo-surface)); }
+.jo-demand-typical { color: var(--jo-ink); background: var(--jo-tray); }
+.jo-breakdown { padding: 4px 0 20px; color: var(--jo-muted); font-size: .935rem; }
+.jo-leg-heading { margin: 8px 0; font-size: 1rem; color: var(--jo-ink); }
+.jo-measured { margin: 0 0 12px; line-height: 1.52; }
+.jo-segments { list-style: none; padding: 0; margin: 0; }
+.jo-segment { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 12px; padding: 11px 0; border-top: 1px solid var(--jo-line); }
+.jo-segment-name { flex: 1 1 130px; font-weight: 520; color: var(--jo-ink); }
+.jo-segment-stat { display: grid; justify-items: end; gap: 3px; }
+.jo-sample { color: var(--jo-muted); font-size: .8rem; }
+.jo-change { gap: 7px; padding: 9px 0; margin: 8px 0; color: var(--jo-ink); font-weight: 620; }
+.jo-empty { margin: 0; padding: 24px; font-size: 1rem; line-height: 1.55; color: var(--jo-muted); }
+@media(max-width: 550px) {
+  .jo-panel .jo-pick { padding: 18px 16px 15px; }
+  .jo-details { margin: 0 16px; }
+  .jo-list { gap: 12px; }
+}
+@media(prefers-reduced-motion: reduce) {
+  .jo-panel * { transition: none !important; }
+}

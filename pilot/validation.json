@@ -1,0 +1,49 @@
+{
+  "coverage": {
+    "holdout": {
+      "unmatched_records": 7019,
+      "unmatched_passengers": 7503,
+      "matched_records": 620,
+      "matched_passengers": 684,
+      "reverse_only_records": 53,
+      "reverse_only_passengers": 55,
+      "ambiguous_records": 1286,
+      "ambiguous_passengers": 1420
+    },
+    "training": {
+      "matched_records": 1838,
+      "matched_passengers": 1985,
+      "unmatched_records": 21705,
+      "unmatched_passengers": 23334,
+      "reverse_only_records": 169,
+      "reverse_only_passengers": 182,
+      "ambiguous_records": 3925,
+      "ambiguous_passengers": 4358
+    }
+  },
+  "metrics": {
+    "weekday": {
+      "cells": 1118,
+      "same_label": 503,
+      "absolute_error_sum": 344.6823529411773,
+      "Typical cells": 508,
+      "Typical observed_sum": 205.5999999999999,
+      "Higher than usual cells": 350,
+      "Higher than usual observed_sum": 411.99999999999994,
+      "Lower than usual cells": 260,
+      "Lower than usual observed_sum": 76.6
+    },
+    "weekend": {
+      "cells": 271,
+      "same_label": 107,
+      "absolute_error_sum": 180.50000000000009,
+      "Typical cells": 120,
+      "Typical observed_sum": 77.5,
+      "Higher than usual cells": 79,
+      "Higher than usual observed_sum": 103.5,
+      "Lower than usual cells": 72,
+      "Lower than usual observed_sum": 38.5
+    }
+  },
+  "gtfs_sha256": "df0bd054959108c6dec852865daee0b03a837903e8d809fb4a7172a966f70b22"
+}
