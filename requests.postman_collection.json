@@ -1,0 +1,116 @@
+{
+  "info": {
+    "name": "Delhi pilot",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Morning direct",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8787/api/journeys?from=West%20Patel%20Nagar&to=Karol%20Bagh%20Metro%20Station&date=2026-10-19&time=10%3A00"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Journey response',()=>{pm.response.to.have.status(200); const r=pm.response.json(); pm.expect(r.direct.length===2 && r.direct.some(j=>j.legs[0].route==='990DOWN' && j.legs[0].label==='Higher than usual')).to.equal(true);});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Quiet afternoon",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8787/api/journeys?from=West%20Patel%20Nagar&to=Karol%20Bagh%20Metro%20Station&date=2026-10-19&time=13%3A00"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Journey response',()=>{pm.response.to.have.status(200); const r=pm.response.json(); pm.expect(r.direct.some(j=>j.legs[0].route==='990DOWN' && j.legs[0].label==='Lower than usual')).to.equal(true);});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Opposite direction",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8787/api/journeys?from=Karol%20Bagh%20Metro%20Station&to=West%20Patel%20Nagar&date=2026-10-19&time=10%3A00"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Journey response',()=>{pm.response.to.have.status(200); const r=pm.response.json(); pm.expect(r.direct.length>=1 && r.direct.every(j=>j.legs[0].route.endsWith('UP'))).to.equal(true);});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Outside service calendar",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8787/api/journeys?from=West%20Patel%20Nagar&to=Karol%20Bagh%20Metro%20Station&date=2027-10-19&time=10%3A00"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Journey response',()=>{pm.response.to.have.status(200); const r=pm.response.json(); pm.expect(!r.direct.length && !r.transfers.length).to.equal(true);});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Missing demand estimate",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8787/api/journeys?from=West%20Patel%20Nagar&to=Karol%20Bagh%20Metro%20Station&date=2026-10-19&time=10%3A00"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Journey response',()=>{pm.response.to.have.status(200); const r=pm.response.json(); pm.expect(r.direct.some(j=>j.legs[0].label==='Limited data')).to.equal(true);});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transfer interchange",
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:8787/api/journeys?from=West%20Patel%20Nagar&to=Karol%20Bagh%20Metro%20Station&date=2026-10-19&time=10%3A00"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test('Journey response',()=>{pm.response.to.have.status(200); const r=pm.response.json(); pm.expect(r.transfers.length>0 && r.transfers.every(j=>j.legs[1].dep-j.legs[0].arr>=180)).to.equal(true);});"
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
