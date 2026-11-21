@@ -50,7 +50,7 @@ globalThis.drawRouteMap = function drawRouteMap(container, journey) {
     const button=document.createElement('button');
     button.type='button'; button.title=label; button.setAttribute('aria-label',label);
     button.textContent=symbol;
-    button.style.cssText='color:#29473d;background:none;border:0;border-radius:0;font:600 17px/1 system-ui;width:32px;height:31px;padding:0;cursor:pointer';
+    button.style.cssText='color:#29473d;background:none;border:0;border-radius:0;font:600 17px/1 system-ui;width:44px;height:44px;padding:0;cursor:pointer';
     if (controls.length) button.style.borderLeft='1px solid #dbddd2';
     button.onclick=()=>{zoom=factor?Math.min(3,Math.max(0.65,zoom*factor)):1;paint()};
     controls.push(button); toolbar.append(button);
@@ -86,6 +86,31 @@ globalThis.drawRouteMap = function drawRouteMap(container, journey) {
     for (const [layer,color,size] of [['streets','#fafaf3',1.65],['avenues','#d4d4c6',4],['avenues','#fffcf4',2.6],
       ['arteries','#d5ccae',6.2],['arteries','#fff3cc',4.4],['rail','#bebfb1',1.5]])
       if(streetLayers[layer]) stroke(streetLayers[layer],color,Math.min(size,Math.max(0.6,size*scale/1.6)));
+    // The bundled detail covers the pilot corridor. For a wider viewport,
+    // place standard Web Mercator tiles beneath the route at its GTFS coordinates.
+    if (wide) {
+      const z=Math.max(8,Math.min(18,Math.round(Math.log2(360*9760*scale/256))));
+      const n=2**z;
+      const tileX=x=>(77.15+x/9760+180)/360*n;
+      const tileY=y=>(1-Math.asinh(Math.tan((28.66-y/11120)*Math.PI/180))/Math.PI)/2*n;
+      const sx=x=>(x/n*360-180-77.15)*9760*scale+dx;
+      const sy=y=>(28.66-Math.atan(Math.sinh(Math.PI*(1-2*y/n)))*180/Math.PI)*11120*scale+dy;
+      const tiles=svg('g',{'aria-hidden':'true'},image);
+      let missing=false;
+      for(let x=Math.floor(tileX(-dx/scale));x<=Math.floor(tileX((width-dx)/scale));x++){
+        for(let y=Math.floor(tileY(-dy/scale));y<=Math.floor(tileY((height-dy)/scale));y++){
+          const tile=svg('image',{x:sx(x),y:sy(y),width:sx(x+1)-sx(x)+.35,height:sy(y+1)-sy(y)+.35,
+            preserveAspectRatio:'none'},tiles);
+          tile.addEventListener('error',()=>{
+            if(!tiles.isConnected || missing)return;
+            missing=true;tiles.replaceChildren();
+            const note=svg('text',{x:12,y:79,'font-size':12,fill:'#264a39'},image,'Street map unavailable · stop locations shown');
+            note.setAttribute('aria-label','Street map unavailable. Showing stop locations.');
+          });
+          tile.setAttribute('href','https://tile.openstreetmap.org/'+z+'/'+x+'/'+y+'.png');
+        }
+      }
+    }
     // Render in screen units to keep wayfinding marks legible at every viewport size.
     const routes=legs.map(stops=>stops.map(stop=>project(stop.xy)));
     for (const route of routes) {

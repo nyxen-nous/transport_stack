@@ -21,9 +21,58 @@
   const origin = el('origin'), destination = el('dest');
   const demoFrom = 'West Patel Nagar', demoTo = 'Karol Bagh Metro Station';
   const stops = [...new Set(Object.values(PILOT.patterns).flatMap(pattern => pattern.names))].sort();
-  for (const stop of stops) {
-    origin.add(new Option(stop, stop));
-    destination.add(new Option(stop, stop));
+  for (const field of [origin, destination]) {
+    const menu = el(field.id+'-options');
+    let active = -1;
+    let matches = [];
+    function close() {
+      menu.hidden = true;
+      field.setAttribute('aria-expanded','false');
+      field.removeAttribute('aria-activedescendant');
+    }
+    function choose(index) {
+      field.value = matches[index];
+      field.setCustomValidity('');
+      close();
+    }
+    function suggest() {
+      const query = field.value.trim().toLowerCase();
+      matches = stops.filter(stop => query.split(/\s+/).every(word => stop.toLowerCase().includes(word)));
+      active = -1;
+      field.removeAttribute('aria-activedescendant');
+      menu.replaceChildren();
+      for (const [index,name] of matches.entries()) {
+        const item = document.createElement('span');
+        item.id = field.id+'-stop-'+index;
+        item.setAttribute('role','option');
+        item.textContent = name;
+        item.onmousedown = event => event.preventDefault();
+        item.onclick = event => {event.preventDefault(); choose(index);};
+        menu.append(item);
+      }
+      if (!matches.length) menu.textContent = 'No matching stop. Try another name.';
+      menu.hidden = false;
+      field.setAttribute('aria-expanded','true');
+    }
+    field.onfocus = () => {field.select(); suggest();};
+    field.oninput = () => {field.setCustomValidity(''); suggest();};
+    field.onblur = close;
+    field.onkeydown = event => {
+      if (event.key === 'Escape') {close();return;}
+      if (event.key === 'Enter' && !menu.hidden && (active >= 0 || matches.length === 1)) {
+        event.preventDefault(); choose(Math.max(active,0));return;
+      }
+      if (!['ArrowDown','ArrowUp'].includes(event.key)) return;
+      event.preventDefault();
+      if (menu.hidden) suggest();
+      if (!matches.length) return;
+      active = active < 0 ? (event.key==='ArrowDown' ? 0 : matches.length-1) :
+        (active+(event.key==='ArrowDown'?1:-1)+matches.length)%matches.length;
+      for (const [index,item] of Array.from(menu.children).entries()) item.setAttribute('aria-selected',String(index===active));
+      const item = menu.children[active];
+      field.setAttribute('aria-activedescendant',item.id);
+      item.scrollIntoView({block:'nearest'});
+    };
   }
 
   function showMap(journey) {
@@ -46,6 +95,14 @@
 
   function render() {
     el('error').hidden = true;
+    for (const field of [origin,destination]) {
+      field.setCustomValidity('');
+      const match = stops.find(stop => stop.toLowerCase() === field.value.trim().toLowerCase());
+      if (match) {field.value=match; continue;}
+      field.setCustomValidity('Choose a stop from the suggestions.');
+      field.reportValidity();
+      return;
+    }
     let result;
     try {
       result = plan(origin.value, destination.value, el('day').value, el('when').value);
