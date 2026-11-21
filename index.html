@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="journeys.css">
 </head>
 <body>
-  <a class="skip" href="#search">Skip to content</a>
+  <a class="skip" href="#content">Skip to content</a>
   <header class="masthead"><div class="shell mast-inner">
     <a class="brand" href="#top" aria-label="Delhi Lines home"><img width="32" height="32" src="mark.svg" alt="">Delhi Lines</a>
     <nav aria-label="Main navigation"><a href="#search">Plan a journey</a><a href="#options">Journey options</a><a href="#map-title">Route map</a><button type="button" class="plain" data-about>About the data</button></nav>
@@ -34,15 +34,15 @@
         </aside>
       </div>
     </section>
-    <div class="shell planner-body">
+    <div class="shell planner-body" id="content" tabindex="-1">
     <section aria-labelledby="plan-title" class="plan-section" id="search">
     <h2 id="plan-title" class="display">Plan your journey</h2>
     <p class="section-lede">Search for a boarding stop and destination on routes 85 and 990.</p>
     <form id="journey-search">
       <div class="form-row">
-        <label class="control"><span><i aria-hidden="true" data-icon="origin"></i>From</span><input id="origin" name="origin" aria-label="From" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="origin-options" autocomplete="off" spellcheck="false" placeholder="Search boarding stops" required><span class="stop-menu" id="origin-options" role="listbox" aria-label="Search boarding stops" hidden></span></label>
+        <label class="control"><span><i aria-hidden="true" data-icon="origin"></i>From</span><input id="origin" name="origin" aria-label="From" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="origin-options" autocomplete="off" spellcheck="false" placeholder="Try Anand Vihar…" required><span class="stop-menu" id="origin-options" role="listbox" aria-label="Search boarding stops" hidden></span></label>
         <button id="swap" type="button" class="swap" title="Swap stops" aria-label="Swap stops"><i aria-hidden="true" data-icon="swap"></i></button>
-        <label class="control"><span><i aria-hidden="true" data-icon="pin"></i>To</span><input id="dest" name="dest" aria-label="To" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="dest-options" autocomplete="off" spellcheck="false" placeholder="Search destination stops" required><span class="stop-menu" id="dest-options" role="listbox" aria-label="Search destination stops" hidden></span></label>
+        <label class="control"><span><i aria-hidden="true" data-icon="pin"></i>To</span><input id="dest" name="dest" aria-label="To" type="search" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="dest-options" autocomplete="off" spellcheck="false" placeholder="Try Karol Bagh…" required><span class="stop-menu" id="dest-options" role="listbox" aria-label="Search destination stops" hidden></span></label>
         <label class="control date"><span><i aria-hidden="true" data-icon="calendar"></i>Travel date</span><input id="day" type="date" value="2026-10-19" required></label>
         <label class="control time"><span><i aria-hidden="true" data-icon="clock"></i>Leave at <small>IST</small></span><input id="when" type="time" value="10:00" required></label>
         <button class="find" type="submit"><i aria-hidden="true" data-icon="search"></i>Find journeys</button>
