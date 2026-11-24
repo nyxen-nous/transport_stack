@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#1f3a2b">
+  <title>Delhi Lines · Bus journey planner</title>
+  <link rel="icon" href="/static/mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+  <link rel="stylesheet" href="/static/app.css">
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="/"><img src="/static/mark.svg" width="28" height="28" alt="">Delhi Lines</a>
+  <p class="tag">Bus travel times measured from 6,000+ DTC buses, not the timetable</p>
+  <nav><a href="/docs">API</a><button type="button" class="link" data-open="about">How it works</button></nav>
+</header>
+
+<main class="layout">
+  <section class="panel" aria-labelledby="plan-title">
+    <h1 id="plan-title">Plan a bus journey</h1>
+    <form id="search" autocomplete="off">
+      <label class="field"><span>From</span>
+        <input id="from" name="from" required placeholder="Stop name or lat,lon" list="from-list">
+        <datalist id="from-list"></datalist></label>
+      <button id="swap" type="button" class="swap" aria-label="Swap origin and destination">⇅</button>
+      <label class="field"><span>To</span>
+        <input id="to" name="to" required placeholder="Stop name or lat,lon" list="to-list">
+        <datalist id="to-list"></datalist></label>
+      <div class="row">
+        <label class="field"><span>Date</span><input id="date" type="date" value="2026-10-27" min="2026-10-01" max="2026-12-31" required></label>
+        <label class="field"><span>Leave at (IST)</span><input id="time" type="time" value="08:30" required></label>
+      </div>
+      <label class="toggle"><input id="live" type="checkbox"> <span>Use live conditions <small id="live-note">(replays the real October GPS feed up to your departure time)</small></span></label>
+      <button class="go" type="submit">Find journeys</button>
+      <p class="hint">Tip: click the map to set <b>From</b>, shift-click to set <b>To</b>.</p>
+    </form>
+    <div class="presets" role="group" aria-label="Examples">
+      <span>Try:</span>
+      <button type="button" data-preset="Kashmere Gate ISBT|Nehru Place|2026-10-27|08:30">Kashmere Gate → Nehru Place, Tue 8:30</button>
+      <button type="button" data-preset="Kashmere Gate ISBT|Nehru Place|2026-10-27|23:00">same, 11 pm</button>
+      <button type="button" data-preset="Anand Vihar ISBT|Dhaula Kuan|2026-10-30|18:00">Anand Vihar → Dhaula Kuan, Fri 6 pm</button>
+    </div>
+    <p id="error" role="alert" hidden></p>
+    <div id="results" aria-live="polite"></div>
+    <section id="profile" hidden aria-labelledby="profile-title">
+      <h2 id="profile-title">Same trip, any time of day</h2>
+      <p class="sub" id="profile-sub"></p>
+      <div id="chart"></div>
+    </section>
+  </section>
+
+  <section class="mapwrap" aria-label="Map">
+    <div class="maptabs" role="tablist">
+      <button role="tab" aria-selected="true" data-tab="journey">Journey</button>
+      <button role="tab" aria-selected="false" data-tab="speeds">Network speeds</button>
+    </div>
+    <div id="map"></div>
+    <div id="speedctl" class="speedctl" hidden>
+      <label>Day <select id="sp-day"><option value="weekday">Weekday</option><option value="saturday">Saturday</option><option value="sunday">Sunday / holiday</option></select></label>
+      <label class="grow">Time <input id="sp-time" type="range" min="10" max="47" value="17"><output id="sp-out">08:30</output></label>
+      <div class="legend"><span style="--c:#1a9850">free-flowing</span><span style="--c:#fee08b">slower</span><span style="--c:#d73027">congested</span></div>
+    </div>
+  </section>
+</main>
+
+<dialog id="about">
+  <h2>How the estimates work</h2>
+  <p><b>The bus fleet is the sensor.</b> Every DTC bus reports its position every 10–20 seconds. For each bus we find the moments it passes each stop and when it waits there. Two consecutive stops give one measured trip along that stretch of road: <b>about 3.5 million measurements a day</b>.</p>
+  <p><b>Why not the timetable?</b> Delhi's published timetable assumes every bus moves at exactly 15 km/h on every road at every hour. Measured speeds range from about 36 km/h at night to about 22 km/h in the evening peak, and vary much more between roads.</p>
+  <p><b>Every estimate depends on the hour.</b> Each stretch has its own time for each half hour on weekdays, Saturdays and Sundays/holidays. Where a stretch has little data, it borrows from the same stretch at other hours, then from nearby roads, then the city average. The planner tells you which.</p>
+  <p><b>Live mode</b> adjusts the next hour using buses that crossed the same stretches in the last 30 minutes. The adjustment fades as the trip goes further into the future.</p>
+  <p><b>The range</b> (e.g. 38–51 min) covers 8 in 10 real bus trips at that time, measured on a held-out week.</p>
+  <form method="dialog"><button class="go">Close</button></form>
+</dialog>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="/static/app.js"></script>
+</body>
+</html>
