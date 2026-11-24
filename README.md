@@ -79,11 +79,13 @@ python scripts/train.py --train 1-24 --test 25-31 --replay-days 27,30
 
 The first command uses the [archived Delhi GTFS](https://ethanc8.github.io/delhi-gtfs/bus.zip), or the current feed from Transport Stack if you have it. The second streams each day out of the 16 GB archive with HTTP range requests (~500 MB per day), map-matches it in ~2 minutes and deletes the raw file, taking ~35 minutes in total. The third fits the model, calibrates it, scores it on the held-out week and writes `artifacts/` and the validation tables.
 
-To compare with Google Maps (needs a Routes API key):
+To compare with Google Maps, no API key is needed. Open the 20 links in `validation/google_manual.csv`, set Transit, then Bus, then "Depart at" the listed weekday and time, and fill in `google_bus_min`. Then run:
 
 ```powershell
-$env:GOOGLE_MAPS_API_KEY="..."; python validation/google_compare.py --n 80
+python validation/score_google_manual.py
 ```
+
+This writes `docs/GOOGLE_COMPARISON.md`, comparing Google, our model and the timetable against the real bus times. With a Routes API key, `validation/google_compare.py` does a larger sample automatically.
 
 ## Live data
 

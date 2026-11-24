@@ -106,8 +106,7 @@ def write_markdown(report, path):
         '| Date | Day | 08–11 median speed | Treated as |', '| --- | --- | ---: | --- |',
         *[f"| {k} | {v['weekday']} | {v['am_peak_kmh']} km/h | {v['model_day_type']} |" for k, v in report['am_peak_speed_by_day'].items()], '',
         '## Google Maps', '',
-        'Run `validation/google_compare.py` with a Routes API key. It queries Google for a sample of these same trips at the '
-        'same weekday and time and writes `artifacts/google_comparison.json` (Google vs real vs ours, single-bus trips only).', '',
+        'Two ways, both scored against the same real GPS trip times:\n\n* **No API key (free):** `validation/google_manual.csv` lists 20 held-out weekday trips across the day, each with a Google Maps link. Set Transit, then Bus, then "Depart at" the listed weekday and time, and type Google\'s bus minutes into `google_bus_min`. Then run `python validation/score_google_manual.py`, which writes `docs/GOOGLE_COMPARISON.md`.\n* **With a Routes API key:** `validation/google_compare.py` does the same for a larger sample automatically.\n\nGoogle only answers for present or future departures, so each trip is asked for at the same weekday and time in the following week.', '',
         'Per-trip rows: `artifacts/validation_trips.csv`.',
     ]
     path.write_text('\n'.join(lines) + '\n', encoding='utf-8')
