@@ -1,0 +1,605 @@
+{
+ "method": "Train on GPS from Oct 1-24, test on real bus trips reconstructed from GPS on Oct 25-31. Trips: one bus departing stop A and arriving at stop B of the same route, passing at least 60% of the stops between. Ride time only (no walking or waiting).",
+ "trips": 17885,
+ "routes": 964,
+ "overall": {
+  "timetable": {
+   "n": 17885,
+   "mae_min": 10.24,
+   "median_ae_min": 6.72,
+   "mape_pct": 38.5,
+   "median_ape_pct": 30.4,
+   "bias_min": 0.83,
+   "within_20pct": 35.0,
+   "within_5min": 38.0
+  },
+  "model": {
+   "n": 17885,
+   "mae_min": 6.69,
+   "median_ae_min": 2.82,
+   "mape_pct": 18.7,
+   "median_ape_pct": 13.0,
+   "bias_min": -3.3,
+   "within_20pct": 67.7,
+   "within_5min": 68.1
+  },
+  "live": {
+   "n": 17885,
+   "mae_min": 6.39,
+   "median_ae_min": 2.6,
+   "mape_pct": 17.7,
+   "median_ape_pct": 12.0,
+   "bias_min": -3.17,
+   "within_20pct": 70.5,
+   "within_5min": 70.6
+  }
+ },
+ "by_period": {
+  "early 05-08": {
+   "timetable": {
+    "n": 2540,
+    "mae_min": 12.5,
+    "median_ae_min": 9.06,
+    "mape_pct": 59.2,
+    "median_ape_pct": 56.5,
+    "bias_min": 7.21,
+    "within_20pct": 13.6,
+    "within_5min": 21.3
+   },
+   "model": {
+    "n": 2540,
+    "mae_min": 5.69,
+    "median_ae_min": 2.01,
+    "mape_pct": 17.9,
+    "median_ape_pct": 11.6,
+    "bias_min": -2.38,
+    "within_20pct": 71.8,
+    "within_5min": 80.0
+   },
+   "live": {
+    "n": 2540,
+    "mae_min": 5.6,
+    "median_ae_min": 1.92,
+    "mape_pct": 17.4,
+    "median_ape_pct": 11.1,
+    "bias_min": -2.57,
+    "within_20pct": 73.8,
+    "within_5min": 80.9
+   }
+  },
+  "morning peak 08-11": {
+   "timetable": {
+    "n": 4234,
+    "mae_min": 9.43,
+    "median_ae_min": 6.16,
+    "mape_pct": 34.8,
+    "median_ape_pct": 27.5,
+    "bias_min": 2.31,
+    "within_20pct": 38.2,
+    "within_5min": 41.5
+   },
+   "model": {
+    "n": 4234,
+    "mae_min": 6.08,
+    "median_ae_min": 2.49,
+    "mape_pct": 17.2,
+    "median_ape_pct": 11.5,
+    "bias_min": -2.34,
+    "within_20pct": 72.3,
+    "within_5min": 71.9
+   },
+   "live": {
+    "n": 4234,
+    "mae_min": 5.87,
+    "median_ae_min": 2.36,
+    "mape_pct": 16.3,
+    "median_ape_pct": 10.8,
+    "bias_min": -2.47,
+    "within_20pct": 75.0,
+    "within_5min": 74.3
+   }
+  },
+  "midday 11-17": {
+   "timetable": {
+    "n": 5326,
+    "mae_min": 9.64,
+    "median_ae_min": 5.78,
+    "mape_pct": 31.6,
+    "median_ape_pct": 23.9,
+    "bias_min": -1.97,
+    "within_20pct": 43.2,
+    "within_5min": 44.6
+   },
+   "model": {
+    "n": 5326,
+    "mae_min": 7.41,
+    "median_ae_min": 3.33,
+    "mape_pct": 19.4,
+    "median_ape_pct": 14.0,
+    "bias_min": -4.29,
+    "within_20pct": 64.9,
+    "within_5min": 63.2
+   },
+   "live": {
+    "n": 5326,
+    "mae_min": 7.05,
+    "median_ae_min": 3.01,
+    "mape_pct": 18.3,
+    "median_ape_pct": 12.7,
+    "bias_min": -4.0,
+    "within_20pct": 67.6,
+    "within_5min": 66.1
+   }
+  },
+  "evening peak 17-20": {
+   "timetable": {
+    "n": 2686,
+    "mae_min": 10.43,
+    "median_ae_min": 6.42,
+    "mape_pct": 28.5,
+    "median_ape_pct": 24.2,
+    "bias_min": -5.67,
+    "within_20pct": 42.2,
+    "within_5min": 40.5
+   },
+   "model": {
+    "n": 2686,
+    "mae_min": 8.16,
+    "median_ae_min": 4.09,
+    "mape_pct": 19.8,
+    "median_ape_pct": 15.2,
+    "bias_min": -4.61,
+    "within_20pct": 62.9,
+    "within_5min": 56.8
+   },
+   "live": {
+    "n": 2686,
+    "mae_min": 7.58,
+    "median_ae_min": 3.56,
+    "mape_pct": 18.1,
+    "median_ape_pct": 13.4,
+    "bias_min": -4.18,
+    "within_20pct": 68.0,
+    "within_5min": 61.1
+   }
+  },
+  "night 20-24": {
+   "timetable": {
+    "n": 2831,
+    "mae_min": 10.08,
+    "median_ae_min": 7.08,
+    "mape_pct": 43.7,
+    "median_ape_pct": 35.1,
+    "bias_min": 3.27,
+    "within_20pct": 29.8,
+    "within_5min": 35.6
+   },
+   "model": {
+    "n": 2831,
+    "mae_min": 6.06,
+    "median_ae_min": 2.73,
+    "mape_pct": 19.2,
+    "median_ape_pct": 13.5,
+    "bias_min": -2.75,
+    "within_20pct": 66.9,
+    "within_5min": 69.7
+   },
+   "live": {
+    "n": 2831,
+    "mae_min": 5.79,
+    "median_ae_min": 2.54,
+    "mape_pct": 18.4,
+    "median_ape_pct": 12.4,
+    "bias_min": -2.5,
+    "within_20pct": 68.6,
+    "within_5min": 71.7
+   }
+  }
+ },
+ "by_day_type": {
+  "weekday": {
+   "timetable": {
+    "n": 12760,
+    "mae_min": 10.16,
+    "median_ae_min": 6.58,
+    "mape_pct": 37.8,
+    "median_ape_pct": 29.4,
+    "bias_min": 0.57,
+    "within_20pct": 36.1,
+    "within_5min": 39.0
+   },
+   "model": {
+    "n": 12760,
+    "mae_min": 6.69,
+    "median_ae_min": 2.87,
+    "mape_pct": 18.8,
+    "median_ape_pct": 13.1,
+    "bias_min": -2.83,
+    "within_20pct": 67.5,
+    "within_5min": 68.0
+   },
+   "live": {
+    "n": 12760,
+    "mae_min": 6.42,
+    "median_ae_min": 2.63,
+    "mape_pct": 17.8,
+    "median_ape_pct": 12.0,
+    "bias_min": -2.89,
+    "within_20pct": 70.3,
+    "within_5min": 70.3
+   }
+  },
+  "saturday": {
+   "timetable": {
+    "n": 2558,
+    "mae_min": 10.46,
+    "median_ae_min": 7.15,
+    "mape_pct": 38.2,
+    "median_ape_pct": 31.1,
+    "bias_min": 0.04,
+    "within_20pct": 33.4,
+    "within_5min": 35.3
+   },
+   "model": {
+    "n": 2558,
+    "mae_min": 7.01,
+    "median_ae_min": 3.01,
+    "mape_pct": 18.8,
+    "median_ape_pct": 13.7,
+    "bias_min": -4.62,
+    "within_20pct": 66.0,
+    "within_5min": 64.5
+   },
+   "live": {
+    "n": 2558,
+    "mae_min": 6.59,
+    "median_ae_min": 2.83,
+    "mape_pct": 17.8,
+    "median_ape_pct": 12.5,
+    "bias_min": -3.92,
+    "within_20pct": 69.5,
+    "within_5min": 68.1
+   }
+  },
+  "sunday": {
+   "timetable": {
+    "n": 2567,
+    "mae_min": 10.45,
+    "median_ae_min": 7.1,
+    "mape_pct": 42.6,
+    "median_ape_pct": 35.0,
+    "bias_min": 2.93,
+    "within_20pct": 31.2,
+    "within_5min": 35.8
+   },
+   "model": {
+    "n": 2567,
+    "mae_min": 6.35,
+    "median_ae_min": 2.41,
+    "mape_pct": 17.5,
+    "median_ape_pct": 12.2,
+    "bias_min": -4.37,
+    "within_20pct": 70.4,
+    "within_5min": 71.8
+   },
+   "live": {
+    "n": 2567,
+    "mae_min": 6.04,
+    "median_ae_min": 2.23,
+    "mape_pct": 16.8,
+    "median_ape_pct": 11.5,
+    "bias_min": -3.83,
+    "within_20pct": 72.7,
+    "within_5min": 74.4
+   }
+  }
+ },
+ "by_distance": {
+  "3-6 km": {
+   "timetable": {
+    "n": 8481,
+    "mae_min": 7.7,
+    "median_ae_min": 4.73,
+    "mape_pct": 39.6,
+    "median_ape_pct": 31.8,
+    "bias_min": -1.79,
+    "within_20pct": 33.2,
+    "within_5min": 52.5
+   },
+   "model": {
+    "n": 8481,
+    "mae_min": 5.62,
+    "median_ae_min": 1.92,
+    "mape_pct": 19.8,
+    "median_ape_pct": 14.1,
+    "bias_min": -3.81,
+    "within_20pct": 64.5,
+    "within_5min": 78.9
+   },
+   "live": {
+    "n": 8481,
+    "mae_min": 5.4,
+    "median_ae_min": 1.8,
+    "mape_pct": 18.7,
+    "median_ape_pct": 12.9,
+    "bias_min": -3.7,
+    "within_20pct": 67.5,
+    "within_5min": 80.9
+   }
+  },
+  "6-10 km": {
+   "timetable": {
+    "n": 4799,
+    "mae_min": 10.93,
+    "median_ae_min": 8.5,
+    "mape_pct": 39.3,
+    "median_ape_pct": 31.1,
+    "bias_min": 0.73,
+    "within_20pct": 34.4,
+    "within_5min": 29.9
+   },
+   "model": {
+    "n": 4799,
+    "mae_min": 7.11,
+    "median_ae_min": 3.21,
+    "mape_pct": 18.4,
+    "median_ape_pct": 12.7,
+    "bias_min": -3.48,
+    "within_20pct": 69.5,
+    "within_5min": 65.7
+   },
+   "live": {
+    "n": 4799,
+    "mae_min": 6.79,
+    "median_ae_min": 2.97,
+    "mape_pct": 17.4,
+    "median_ape_pct": 11.7,
+    "bias_min": -3.35,
+    "within_20pct": 71.7,
+    "within_5min": 68.7
+   }
+  },
+  "10-18 km": {
+   "timetable": {
+    "n": 4605,
+    "mae_min": 14.22,
+    "median_ae_min": 12.42,
+    "mape_pct": 35.8,
+    "median_ape_pct": 27.4,
+    "bias_min": 5.77,
+    "within_20pct": 39.0,
+    "within_5min": 19.7
+   },
+   "model": {
+    "n": 4605,
+    "mae_min": 8.23,
+    "median_ae_min": 4.93,
+    "mape_pct": 16.9,
+    "median_ape_pct": 11.8,
+    "bias_min": -2.18,
+    "within_20pct": 71.8,
+    "within_5min": 50.5
+   },
+   "live": {
+    "n": 4605,
+    "mae_min": 7.81,
+    "median_ae_min": 4.52,
+    "mape_pct": 16.0,
+    "median_ape_pct": 10.8,
+    "bias_min": -2.03,
+    "within_20pct": 74.7,
+    "within_5min": 53.4
+   }
+  }
+ },
+ "range_coverage_pct": 78.0,
+ "calibration": {
+  "scale": 1.02441752756305,
+  "rho": 0.8
+ },
+ "peak_vs_night": null,
+ "minutes_per_km_by_period": {
+  "early 05-08": {
+   "observed": 3.23,
+   "model": 2.76,
+   "timetable": 4.0
+  },
+  "morning peak 08-11": {
+   "observed": 3.89,
+   "model": 3.43,
+   "timetable": 4.0
+  },
+  "midday 11-17": {
+   "observed": 4.48,
+   "model": 3.72,
+   "timetable": 4.0
+  },
+  "evening peak 17-20": {
+   "observed": 4.98,
+   "model": 4.18,
+   "timetable": 4.0
+  },
+  "night 20-24": {
+   "observed": 3.75,
+   "model": 3.21,
+   "timetable": 4.0
+  }
+ },
+ "data_quality": {
+  "days": 31,
+  "raw_pings": 912877061,
+  "duplicate_share_pct": 38.5,
+  "gps_jumps_removed": 34088,
+  "outside_delhi": 851431,
+  "segment_observations": 86480607,
+  "implausible_share_pct": 2.0,
+  "buses_per_day": 6221,
+  "segments_covered_per_day": 17922,
+  "segments_total": 21286
+ },
+ "am_peak_speed_by_day": {
+  "2026-10-01": {
+   "weekday": "Thu",
+   "am_peak_kmh": 22.5,
+   "model_day_type": "weekday"
+  },
+  "2026-10-02": {
+   "weekday": "Fri",
+   "am_peak_kmh": 27.8,
+   "model_day_type": "sunday"
+  },
+  "2026-10-03": {
+   "weekday": "Sat",
+   "am_peak_kmh": 24.6,
+   "model_day_type": "saturday"
+  },
+  "2026-10-04": {
+   "weekday": "Sun",
+   "am_peak_kmh": 27.0,
+   "model_day_type": "sunday"
+  },
+  "2026-10-05": {
+   "weekday": "Mon",
+   "am_peak_kmh": 22.2,
+   "model_day_type": "weekday"
+  },
+  "2026-10-06": {
+   "weekday": "Tue",
+   "am_peak_kmh": 22.2,
+   "model_day_type": "weekday"
+  },
+  "2026-10-07": {
+   "weekday": "Wed",
+   "am_peak_kmh": 22.5,
+   "model_day_type": "weekday"
+  },
+  "2026-10-08": {
+   "weekday": "Thu",
+   "am_peak_kmh": 22.4,
+   "model_day_type": "weekday"
+  },
+  "2026-10-09": {
+   "weekday": "Fri",
+   "am_peak_kmh": 22.7,
+   "model_day_type": "weekday"
+  },
+  "2026-10-10": {
+   "weekday": "Sat",
+   "am_peak_kmh": 24.7,
+   "model_day_type": "saturday"
+  },
+  "2026-10-11": {
+   "weekday": "Sun",
+   "am_peak_kmh": 27.4,
+   "model_day_type": "sunday"
+  },
+  "2026-10-12": {
+   "weekday": "Mon",
+   "am_peak_kmh": 21.6,
+   "model_day_type": "weekday"
+  },
+  "2026-10-13": {
+   "weekday": "Tue",
+   "am_peak_kmh": 22.1,
+   "model_day_type": "weekday"
+  },
+  "2026-10-14": {
+   "weekday": "Wed",
+   "am_peak_kmh": 22.5,
+   "model_day_type": "weekday"
+  },
+  "2026-10-15": {
+   "weekday": "Thu",
+   "am_peak_kmh": 22.3,
+   "model_day_type": "weekday"
+  },
+  "2026-10-16": {
+   "weekday": "Fri",
+   "am_peak_kmh": 22.5,
+   "model_day_type": "weekday"
+  },
+  "2026-10-17": {
+   "weekday": "Sat",
+   "am_peak_kmh": 24.2,
+   "model_day_type": "saturday"
+  },
+  "2026-10-18": {
+   "weekday": "Sun",
+   "am_peak_kmh": 26.9,
+   "model_day_type": "sunday"
+  },
+  "2026-10-19": {
+   "weekday": "Mon",
+   "am_peak_kmh": 25.2,
+   "model_day_type": "weekday"
+  },
+  "2026-10-20": {
+   "weekday": "Tue",
+   "am_peak_kmh": 27.2,
+   "model_day_type": "sunday"
+  },
+  "2026-10-21": {
+   "weekday": "Wed",
+   "am_peak_kmh": 23.2,
+   "model_day_type": "weekday"
+  },
+  "2026-10-22": {
+   "weekday": "Thu",
+   "am_peak_kmh": 22.7,
+   "model_day_type": "weekday"
+  },
+  "2026-10-23": {
+   "weekday": "Fri",
+   "am_peak_kmh": 22.9,
+   "model_day_type": "weekday"
+  },
+  "2026-10-24": {
+   "weekday": "Sat",
+   "am_peak_kmh": 23.9,
+   "model_day_type": "saturday"
+  },
+  "2026-10-25": {
+   "weekday": "Sun",
+   "am_peak_kmh": 26.4,
+   "model_day_type": "sunday"
+  },
+  "2026-10-26": {
+   "weekday": "Mon",
+   "am_peak_kmh": 23.7,
+   "model_day_type": "weekday"
+  },
+  "2026-10-27": {
+   "weekday": "Tue",
+   "am_peak_kmh": 21.9,
+   "model_day_type": "weekday"
+  },
+  "2026-10-28": {
+   "weekday": "Wed",
+   "am_peak_kmh": 22.0,
+   "model_day_type": "weekday"
+  },
+  "2026-10-29": {
+   "weekday": "Thu",
+   "am_peak_kmh": 23.6,
+   "model_day_type": "weekday"
+  },
+  "2026-10-30": {
+   "weekday": "Fri",
+   "am_peak_kmh": 21.7,
+   "model_day_type": "weekday"
+  },
+  "2026-10-31": {
+   "weekday": "Sat",
+   "am_peak_kmh": 23.2,
+   "model_day_type": "saturday"
+  }
+ },
+ "model_coverage": {
+  "segments": 21286,
+  "segments_observed": 19981,
+  "cells_level0": 0.45384453266100827,
+  "cells_level1": 0.48484756543163476,
+  "cells_level2": 0.05984763068057252,
+  "cells_level3": 0.001460271226784428
+ }
+}
